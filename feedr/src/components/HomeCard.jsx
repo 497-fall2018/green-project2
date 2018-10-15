@@ -20,6 +20,7 @@ class HomeCard extends Component {
     console.log(tempList)
     const cardStack = tempList.map((rest)=>{
       console.log(rest)
+      //call RestCard component and pass necessary props
     })
   }
 
