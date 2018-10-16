@@ -7,7 +7,8 @@ class HomeCard extends Component {
   constructor(props){
     super(props);
     this.state = {
-      firstTime: true
+      firstTime: true,
+      currentRest: "Test"
     }
   }
 
@@ -20,6 +21,7 @@ class HomeCard extends Component {
     console.log(tempList)
     const cardStack = tempList.map((rest)=>{
       console.log(rest)
+      this.currentRest = rest
       //call RestCard component and pass necessary props
     })
   }
@@ -41,14 +43,19 @@ class HomeCard extends Component {
 
 
   render() {
-    return (
-      <div>
+    if (this.state.firstTime){
+      return (
         <div className='cardContainer'>
           <div className='cardTitle'>{this.generateTitleText()}</div>
           <div className='cardSubtitle'>{this.generateSubtitleText()}</div>
           <img className='cardImg' src='/img/homecard.png' alt='swipe-demo' />
           <StartButton firstTime={this.state.firstTime} generateCards={()=> this.generateCards()}/>
         </div>
+        );
+    }
+    return (
+      <div>
+        <RestCard restName={"Panera Bread"}/>
       </div>
     );
   }
