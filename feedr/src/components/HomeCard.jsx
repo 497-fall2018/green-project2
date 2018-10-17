@@ -6,24 +6,22 @@ class HomeCard extends Component {
 
   constructor(props){
     super(props);
+    this.tempList = ['chipotle','panera']
     this.state = {
       firstTime: true,
-      currentRest: "Test"
+      cardsGenerated: false,
+      numCards: 0
     }
   }
 
   generateCards(){
     console.log('generateCards')
-    this.setState({firstTime:false})
-    const tempList = [
-      'chipotle','panera'
-    ]
-    console.log(tempList)
-    const cardStack = tempList.map((rest)=>{
-      console.log(rest)
-      this.currentRest = rest
-      //call RestCard component and pass necessary props
+    this.setState({
+      firstTime:false,
+      cardsGenerated: true,
+      numCards: this.tempList.length
     })
+
   }
 
   generateTitleText(){
@@ -40,24 +38,38 @@ class HomeCard extends Component {
     return 'looks like you are all out of restaurants! click below to start over.'
   }
 
+  noThanks(){
+    this.setState({
+      numCards: this.state.numCards-1
+    })
+  }
+
 
 
   render() {
-    if (this.state.firstTime){
+    console.log(this.state.numCards)
+    var cardStack = []
+
+    if (this.state.cardsGenerated){
+      cardStack = this.tempList.map((rest,i)=>{
+        console.log(rest)
+        return(<RestCard key={i} restName={rest} restDescription='test string' noThanks={()=>this.noThanks()}/>)
+      })
+    }
+
+    if (this.state.numCards === 0){
+      cardStack = [];
+    }
+
       return (
         <div className='cardContainer'>
           <div className='cardTitle'>{this.generateTitleText()}</div>
           <div className='cardSubtitle'>{this.generateSubtitleText()}</div>
           <img className='cardImg' src='/img/homecard.png' alt='swipe-demo' />
           <StartButton firstTime={this.state.firstTime} generateCards={()=> this.generateCards()}/>
+          {cardStack}
         </div>
-        );
-    }
-    return (
-      <div>
-        <RestCard restName={"Panera Bread"}/>
-      </div>
-    );
+        )
   }
 }
 

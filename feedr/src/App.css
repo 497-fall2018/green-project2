@@ -65,6 +65,21 @@ body{
   height: 80vh;
 }
 
+.restCardContainer{
+  background-color: white;
+  position: absolute;
+  top: 0px;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px -1px #999999;
+  text-align: center;
+  height: 80vh;
+}
+
+.restCardDisplayNone{
+  display: none;
+}
+
 .cardTitle{
   width: 100%;
   font-size: 42pt;
