@@ -21,6 +21,11 @@ body{
   color: white;
   border: 0px;
   font-size: 12pt;
+  font-family: Roboto;
+  letter-spacing: 2px;
+  font-weight: 300;
+  margin-top: 15px;
+  width: auto;
 }
 
 /* HEADBAR CLASSES */
@@ -60,20 +65,22 @@ body{
   margin: 0px 10px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 1px 1px 10px -1px #999999;
+  box-shadow: 1px 1px 30px -1px rgba(0,0,0,.15);
   text-align: center;
   height: 80vh;
+  width: 315px;
 }
 
 .restCardContainer{
   background-color: white;
   position: absolute;
-  top: 0px;
+  top: 80px;
+  margin: 0px 10px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 1px 1px 10px -1px #999999;
   text-align: center;
   height: 80vh;
+  width: 315px;
 }
 
 .restCardDisplayNone{
@@ -82,9 +89,18 @@ body{
 
 .cardTitle{
   width: 100%;
-  font-size: 42pt;
-  font-weight: 200;
-  color: #666666;
+  font-size: 24pt;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: left;
+}
+
+.homecardTitle{
+  margin-top: -45px;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,.15);
+  font-weight: 400;
 }
 
 .cardSubtitle{
@@ -93,15 +109,36 @@ body{
   font-weight: 200;
   color: #444444;
   line-height: 1.4;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.homeCardSubtitle{
+  text-align: center;
 }
 
 .cardImg{
-  height: 250px;
-  padding: 20px;
+  width: 355px;
+  margin-left: -20px;
+  margin-top: -20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0px;
 }
 
+.ourChoice{
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: left;
+  color: #666;
+  font-size: 10px;
+  margin-top: 10px;
+}
 
-
+.address{
+  margin-top: 0px;
+  text-transform: uppercase;
+}
 
 
 
