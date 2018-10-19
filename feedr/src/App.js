@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.tempList = ['chipotle','panera']
     this.state = {
-      // firstTime: true,
+      firstTime: true,
       cardsGenerated: false,
       numCards: 0
     }
@@ -18,7 +18,7 @@ class App extends Component {
   generateCards(){
     console.log('generateCards')
     this.setState({
-      firstTime:false,
+      firstTime: false,
       cardsGenerated: true,
       numCards: this.tempList.length
     })
@@ -50,7 +50,7 @@ class App extends Component {
     return (
       <div>
         <Headbar />
-        <HomeCard generateCards={()=> this.generateCards()}/>
+        <HomeCard firstTime={this.state.firstTime} generateCards={()=> this.generateCards()}/>
         {cardStack}
       </div>
     );

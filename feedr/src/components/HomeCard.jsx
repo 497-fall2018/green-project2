@@ -6,12 +6,13 @@ class HomeCard extends Component {
 
   constructor(props){
     super(props);
+    console.log(this.props.firstTime);
     // this.tempList = ['chipotle','panera']
-    this.state = {
-      firstTime: true
+    // this.state = {
+    //   firstTime: true
       // cardsGenerated: false,
       // numCards: 0
-    }
+    // }
   }
 
   // generateCards(){
@@ -25,14 +26,14 @@ class HomeCard extends Component {
   // }
 
   generateTitleText(){
-    if (this.state.firstTime){
+    if (this.props.firstTime){
       return 'Welcome.'
     }
     return 'Uh oh...'
   }
 
   generateSubtitleText(){
-    if (this.state.firstTime){
+    if (this.props.firstTime){
       return 'feedr is a new type of restaurant app. We help you find the food you are looking for, without the overwhelming lists.'
     }
     return 'looks like you are all out of restaurants! click below to start over.'
@@ -66,7 +67,7 @@ class HomeCard extends Component {
           <div className='cardTitle'>{this.generateTitleText()}</div>
           <div className='cardSubtitle'>{this.generateSubtitleText()}</div>
           <img className='cardImg' src='/img/homecard.png' alt='swipe-demo' />
-          <StartButton firstTime={this.state.firstTime} generateCards={()=> this.props.generateCards()}/>
+          <StartButton firstTime={this.props.firstTime} generateCards={()=> this.props.generateCards()}/>
         </div>
         )
   }
