@@ -7,7 +7,10 @@ import RestCard from './components/RestCard';
 class App extends Component {
   constructor(props){
     super(props);
-    this.tempList = ['chipotle','panera']
+    this.tempList = ['Joy Yee Noodle', '10Q Chicken']
+    this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
+    this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
+    this.addrList = ['519 Davis St', '816 Church St']
     this.state = {
       firstTime: true,
       cardsGenerated: false,
@@ -37,8 +40,9 @@ class App extends Component {
     if (this.state.cardsGenerated){
       cardStack = this.tempList.map((rest,i)=>{
         console.log(rest)
+        console.log(i)
         return(
-            <RestCard key={i} restName={rest} restDescription='This is one of the best places for pizza I have found in the city. Their double decker pizza is AMAZING! I have ordered from here a few times and everytime Im impressed.' noThanks={()=>this.noThanks()} />
+            <RestCard key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
           )
       })
     }

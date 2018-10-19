@@ -4,7 +4,7 @@ class StartButton extends Component {
 
   generateText(){
     if (this.props.firstTime){
-      return 'START SWIPING'
+      return 'SEE OUR CHOICES'
     }
     return 'RESTART'
   }

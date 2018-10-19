@@ -28,10 +28,12 @@ class RestCard extends Component {
     return (
       <div>
         <div className={this.cardClass()} style={{zIndex:'999'}}>
+        <img className='cardImg' src={this.props.restImg} alt='swipe-demo' />
+        <div className='ourChoice'>OUR CHOICE:</div>
           <div className='cardTitle'>{this.props.restName}</div>
+          <div className="ourChoice address">{this.props.restAddr}</div>
           <div className='cardSubtitle'>{this.props.restDescription}</div>
-          <img className='cardImg' src='/img/homecard.png' alt='swipe-demo' />
-          <button onClick={()=>this.changeCardClass()}>no thanks</button>
+          <button className="button1" onClick={()=>this.changeCardClass()}>NO THANKS</button>
         </div>
       </div>
     );
