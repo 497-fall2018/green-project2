@@ -3,14 +3,38 @@ import './App.css';
 import Headbar from './components/Headbar';
 import HomeCard from './components/HomeCard';
 import RestCard from './components/RestCard';import Swipeable from 'react-swipeable'
+import axios from 'axios';
 
 class App extends Component {
   constructor(props){
     super(props);
-    this.tempList = ['Joy Yee Noodle', '10Q Chicken']
-    this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
-    this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
-    this.addrList = ['519 Davis St', '816 Church St']
+
+     // this.tempList = ['Joy Yee Noodle', '10Q Chicken']
+     // this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
+     // this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
+     // this.addrList = ['519 Davis St', '816 Church St']
+    
+  
+    axios.get('/data')
+    .then(res=>{
+      if(res.status==200){
+         console.log("************************")
+         console.log(res.data);
+         this.tempList=[];
+         this.imgList=[];
+         this.descList=[];
+         this.addrList=[];
+         var i;
+         for (i =0; i< res.data.length; i++){
+          this.tempList.push(res.data[i]["temp"]);
+          this.imgList.push(res.data[i]["img"]);
+          this.descList.push(res.data[i]["desc"]);
+          this.descList.push(res.data[i]["addr"]);
+         }
+       }
+       })
+
+        //****************************************************
     this.state = {
       firstTime: true,
       cardsGenerated: false,
@@ -20,13 +44,14 @@ class App extends Component {
   }
 
 
-  generateCards(){
-    console.log('generateCards')
+
+  generateCards() {
+    console.log('generateCards');
     this.setState({
       firstTime: false,
       cardsGenerated: true,
       numCards: this.tempList.length
-    })
+    });
 
   }
 
