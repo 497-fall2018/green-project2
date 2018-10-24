@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import Headbar from './components/Headbar';
 import HomeCard from './components/HomeCard';
-import RestCard from './components/RestCard';
+import RestCard from './components/RestCard';import Swipeable from 'react-swipeable'
 
 class App extends Component {
   constructor(props){
@@ -16,7 +16,9 @@ class App extends Component {
       cardsGenerated: false,
       numCards: 0
     }
+    this.child = React.createRef();
   }
+
 
   generateCards(){
     console.log('generateCards')
@@ -34,15 +36,45 @@ class App extends Component {
     })
   }
 
+  swiping(e, deltaX, deltaY, absX, absY, velocity) {
+    console.log("You're Swiping...", e, deltaX, deltaY, absX, absY, velocity)
+  }
+
+  swipingLeft(e, absX) {
+    console.log("You're Swiping to the Left...", e, absX)
+  }
+
+  swiped(e, deltaX, deltaY, isFlick, velocity) {
+    console.log("You Swiped...", e, deltaX, deltaY, isFlick, velocity)
+  }
+
+  swipedUp(e, deltaY, isFlick) {
+    console.log("You Swiped Up...", e, deltaY, isFlick)
+  }
+
+  onSwiped(direction) {
+    console.log('ryan just swiped ',direction)
+    this.noThanks()
+    this.child.current.changeCardClass();
+  }
+
   render() {
     var cardStack = []
 
     if (this.state.cardsGenerated){
       cardStack = this.tempList.map((rest,i)=>{
-        console.log(rest)
-        console.log(i)
         return(
-            <RestCard key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
+          <Swipeable
+            onSwiping={this.swiping}
+            onSwipingLeft={this.swipingLeft}
+            onSwiped={this.swiped}
+            onSwipedUp={this.swipedUp}
+            trackMouse
+            preventDefaultTouchmoveEvent
+            onSwipedLeft={() => this.onSwiped('LEFT')}
+            onSwipedRight={() => this.onSwiped('RIGHT')} >
+              <RestCard ref={this.child} key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
+          </Swipeable>
           )
       })
     }
@@ -62,3 +94,36 @@ class App extends Component {
 }
 
 export default App;
+
+class SwipeComponent extends React.Component {
+
+  swiping(e, deltaX, deltaY, absX, absY, velocity) {
+    console.log("You're Swiping...", e, deltaX, deltaY, absX, absY, velocity)
+  }
+
+  swipingLeft(e, absX) {
+    console.log("You're Swiping to the Left...", e, absX)
+  }
+
+  swiped(e, deltaX, deltaY, isFlick, velocity) {
+    console.log("You Swiped...", e, deltaX, deltaY, isFlick, velocity)
+  }
+
+  swipedUp(e, deltaY, isFlick) {
+    console.log("You Swiped Up...", e, deltaY, isFlick)
+  }
+
+
+
+  render() {
+    return (
+      <Swipeable
+        onSwiping={this.swiping}
+        onSwipingLeft={this.swipingLeft}
+        onSwiped={this.swiped}
+        onSwipedUp={this.swipedUp} >
+          You can swipe here!
+      </Swipeable>
+    )
+  }
+}
