@@ -54,8 +54,13 @@ class App extends Component {
 
   onSwiped(direction) {
     console.log('ryan just swiped ',direction)
-    this.noThanks()
-    this.child.current.changeCardClass();
+    if(direction==='LEFT'){
+      this.noThanks()
+      this.child.current.changeCardClass();
+    }
+    if(direction==='RIGHT'){
+      alert("restaurant selected! we're working on displaying the restaurant info now.")
+    }
   }
 
   render() {
