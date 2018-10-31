@@ -9,16 +9,15 @@ class App extends Component {
   constructor(props){
     super(props);
 
-     // this.tempList = ['Joy Yee Noodle', '10Q Chicken']
-     // this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
-     // this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
-     // this.addrList = ['519 Davis St', '816 Church St']
+// this.tempList = ['Joy Yee Noodle', '10Q Chicken']
+// this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
+// this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
+// this.addrList = ['519 Davis St', '816 Church St']
     
   
-    axios.get('/data')
+    axios.get('/restaurant/data')
     .then(res=>{
       if(res.status==200){
-         console.log("************************")
          console.log(res.data);
          this.tempList=[];
          this.imgList=[];
@@ -34,7 +33,6 @@ class App extends Component {
        }
        })
 
-        //****************************************************
     this.state = {
       firstTime: true,
       cardsGenerated: false,
