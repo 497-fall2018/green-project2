@@ -17,7 +17,7 @@ class App extends Component {
   
     axios.get('/restaurant/data')
     .then(res=>{
-      if(res.status==200){
+      if(res.status===200){
          console.log(res.data);
          this.tempList=[];
          this.imgList=[];
