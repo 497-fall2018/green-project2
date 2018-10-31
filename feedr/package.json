@@ -10,6 +10,7 @@
     "nodemon": "^1.18.5",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
+    "react-draggable": "^3.0.5",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.0.5",
     "react-swipeable": "^4.3.0"

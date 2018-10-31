@@ -4,6 +4,7 @@ import Headbar from './components/Headbar';
 import HomeCard from './components/HomeCard';
 import RestCard from './components/RestCard';import Swipeable from 'react-swipeable'
 import axios from 'axios';
+import Draggable from 'react-draggable';
 
 class App extends Component {
   constructor(props){
@@ -13,8 +14,8 @@ class App extends Component {
 // this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
 // this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
 // this.addrList = ['519 Davis St', '816 Church St']
-    
-  
+
+
     axios.get('/restaurant/data')
     .then(res=>{
       if(res.status===200){
@@ -101,7 +102,11 @@ class App extends Component {
             preventDefaultTouchmoveEvent
             onSwipedLeft={() => this.onSwiped('LEFT')}
             onSwipedRight={() => this.onSwiped('RIGHT')} >
-              <RestCard ref={this.child} key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
+              <Draggable>
+                <div>
+                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
+                </div>
+              </Draggable>
           </Swipeable>
           )
       })
