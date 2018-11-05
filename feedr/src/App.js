@@ -3,8 +3,9 @@ import './App.css';
 import Headbar from './components/Headbar';
 import HomeCard from './components/HomeCard';
 import RestCard from './components/RestCard';import Swipeable from 'react-swipeable'
-import axios from 'axios';
+// import axios from 'axios';
 import Draggable from 'react-draggable';
+// import YelpApi from 'v3-yelp-api';
 
 class App extends Component {
   constructor(props){
@@ -34,9 +35,32 @@ class App extends Component {
     //    }
     //    })
 
-    this.location = "Evanston"
+    this.tempList = []
+    this.imgList = []
+    this.descList = []
+    this.addrList = []
 
-    this.GetRestaurants(this.location)
+
+    this.location = "Evanston"
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    var url = proxyurl + 'https://api.yelp.com/v3/businesses/search?location=' + this.location;
+    var bearer_token = "h-92ctgESgaQnU1snhIDjHp997zk4U0YAP13T1fps98DT14y4AlTW3bmUoqf1A1HHPDjH2-snhdttnUUF1gupBtFDDP8CF7KRcYb1s2qzKb5Y32EirPW69uVMwLaW3Yx"
+    var bearer = 'Bearer '+ bearer_token;
+    var obj = {
+      method: 'GET',
+      // withCredentials: true,
+      // credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': bearer,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    }
+
+    this.GetRestaurants(url, obj)
 
     this.state = {
       firstTime: true,
@@ -46,16 +70,18 @@ class App extends Component {
     this.child = React.createRef();
   }
 
-  GetRestaurants(location) {
-    fetch('https://api.yelp.com/v3/businesses/search?location='+location)
+  GetRestaurants(url, obj) {
+    fetch(url, obj)
       .then(results => {
         return results.json()
       }).then(data => {
+        console.log(data.businesses)
+
         data.businesses.map((restaurant) => {
-          this.props.tempList.push(restaurant.name)
-          this.props.imgList.push(restaurant.image_url)
-          this.props.descList.push(restaurant.name)
-          this.props.addrList.push(restaurant.location.display_address)
+          this.tempList.push(restaurant.name)
+          this.imgList.push(restaurant.image_url)
+          this.descList.push(restaurant.name)
+          this.addrList.push(restaurant.location.display_address)
         })
       });
   }
