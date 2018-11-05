@@ -16,23 +16,27 @@ class App extends Component {
 // this.addrList = ['519 Davis St', '816 Church St']
 
 
-    axios.get('/restaurant/data')
-    .then(res=>{
-      if(res.status===200){
-         console.log(res.data);
-         this.tempList=[];
-         this.imgList=[];
-         this.descList=[];
-         this.addrList=[];
-         var i;
-         for (i =0; i< res.data.length; i++){
-          this.tempList.push(res.data[i]["temp"]);
-          this.imgList.push(res.data[i]["img"]);
-          this.descList.push(res.data[i]["desc"]);
-          this.descList.push(res.data[i]["addr"]);
-         }
-       }
-       })
+    // axios.get('/restaurant/data')
+    // .then(res=>{
+    //   if(res.status===200){
+    //      console.log(res.data);
+    //      this.tempList=[];
+    //      this.imgList=[];
+    //      this.descList=[];
+    //      this.addrList=[];
+    //      var i;
+    //      for (i =0; i< res.data.length; i++){
+    //       this.tempList.push(res.data[i]["temp"]);
+    //       this.imgList.push(res.data[i]["img"]);
+    //       this.descList.push(res.data[i]["desc"]);
+    //       this.descList.push(res.data[i]["addr"]);
+    //      }
+    //    }
+    //    })
+
+    this.location = "Evanston"
+
+    this.GetRestaurants(this.location)
 
     this.state = {
       firstTime: true,
@@ -42,6 +46,19 @@ class App extends Component {
     this.child = React.createRef();
   }
 
+  GetRestaurants(location) {
+    fetch('https://api.yelp.com/v3/businesses/search?location='+location)
+      .then(results => {
+        return results.json()
+      }).then(data => {
+        data.businesses.map((restaurant) => {
+          this.props.tempList.push(restaurant.name)
+          this.props.imgList.push(restaurant.image_url)
+          this.props.descList.push(restaurant.name)
+          this.props.addrList.push(restaurant.location.display_address)
+        })
+      });
+  }
 
 
   generateCards() {
