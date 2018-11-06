@@ -87,6 +87,22 @@ body{
   display: none;
 }
 
+.restProfileContainer{
+  background-color: white;
+  position: absolute;
+  top: 20px;
+  margin: 0px 10px;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  height: 80vh;
+  width: 315px;
+}
+
+.restProfileDisplayNone{
+  display: none;
+}
+
 .cardTitle{
   width: 100%;
   font-size: 24pt;
@@ -126,12 +142,38 @@ body{
   padding: 0px;
 }
 
+.restProfileImg{
+  width: 355px;
+  margin-left: -20px;
+  margin-top: 0px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0px;
+}
+
 .ourChoice{
   font-weight: 700;
   letter-spacing: 6px;
   text-align: left;
   color: #666;
   font-size: 10px;
+  margin-top: 10px;
+}
+
+.yourChoice{
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-align: left;
+  color: #666;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.restProfileDescription{
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: left;
+  font-size: 14px;
   margin-top: 10px;
 }
 

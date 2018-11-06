@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import Headbar from './components/Headbar';
 import HomeCard from './components/HomeCard';
-import RestCard from './components/RestCard';import Swipeable from 'react-swipeable'
+import RestCard from './components/RestCard';
+import RestProfile from './components/RestProfile';
+import Swipeable from 'react-swipeable';
+
 // import axios from 'axios';
 import Draggable from 'react-draggable';
 // import YelpApi from 'v3-yelp-api';
@@ -39,6 +42,10 @@ class App extends Component {
     this.imgList = []
     this.descList = []
     this.addrList = []
+    this.isClosedList = []
+    this.phoneList = []
+    this.priceList = []
+    this.ratingList = []
 
 
     this.location = "Evanston"
@@ -65,7 +72,9 @@ class App extends Component {
     this.state = {
       firstTime: true,
       cardsGenerated: false,
-      numCards: 0
+      restChosen: false,
+      numCards: 0,
+      chosenRestIndex: 0
     }
     this.child = React.createRef();
   }
@@ -82,6 +91,10 @@ class App extends Component {
           this.imgList.push(restaurant.image_url)
           this.descList.push(restaurant.name)
           this.addrList.push(restaurant.location.display_address)
+          this.isClosedList.push(restaurant.is_closed)
+          this.phoneList.push(restaurant.phone)
+          this.priceList.push(restaurant.price)
+          this.ratingList.push(restaurant.rating)
         })
       });
   }
@@ -103,6 +116,12 @@ class App extends Component {
     })
   }
 
+  closeRestProfile(){
+    this.setState({
+      restChosen: false
+    })
+  }
+
   swiping(e, deltaX, deltaY, absX, absY, velocity) {
     console.log("You're Swiping...", e, deltaX, deltaY, absX, absY, velocity)
   }
@@ -119,14 +138,18 @@ class App extends Component {
     console.log("You Swiped Up...", e, deltaY, isFlick)
   }
 
-  onSwiped(direction) {
+  onSwiped(direction, index) {
     console.log('ryan just swiped ',direction)
     if(direction==='LEFT'){
       this.noThanks()
       this.child.current.changeCardClass();
     }
     if(direction==='RIGHT'){
-      alert("restaurant selected! we're working on displaying the restaurant info now.")
+      this.setState({
+        restChosen: true,
+        cardsGenerated: false,
+        chosenRestIndex: index
+      });
     }
   }
 
@@ -144,7 +167,7 @@ class App extends Component {
             trackMouse
             preventDefaultTouchmoveEvent
             onSwipedLeft={() => this.onSwiped('LEFT')}
-            onSwipedRight={() => this.onSwiped('RIGHT')} >
+            onSwipedRight={() => this.onSwiped('RIGHT', i)} >
               <Draggable>
                 <div>
                   <RestCard ref={this.child} key={i} restName={rest} restDescription={this.descList[i]} restImg={this.imgList[i]} restAddr = {this.addrList[i]} noThanks={()=>this.noThanks()} />
@@ -155,15 +178,27 @@ class App extends Component {
       })
     }
 
+
     if (this.state.numCards === 0){
       cardStack = [];
     }
 
+    var c = this.state.chosenRestIndex
     return (
       <div>
         <Headbar />
-        <HomeCard firstTime={this.state.firstTime} generateCards={()=> this.generateCards()}/>
+        <HomeCard firstTime={this.state.firstTime} generateCards={()=> this.generateCards()} />
         {cardStack}
+        <RestProfile displayed = {this.state.restChosen} 
+          restName = {this.tempList[c]} 
+          restDescription = {this.descList[c]} 
+          restImg = {this.imgList[c]} 
+          restAddr = {this.addrList[c]} 
+          restIsClosed = {this.isClosedList[c]} 
+          restPhone = {this.phoneList[c]} 
+          restPrice = {this.priceList[c]} 
+          restRating = {this.ratingList[c]} 
+          closeRestProfile = {()=>this.closeRestProfile()} />
       </div>
     );
   }
