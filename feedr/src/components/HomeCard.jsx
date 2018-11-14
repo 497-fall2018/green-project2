@@ -8,6 +8,8 @@ class HomeCard extends Component {
   constructor(props){
     super(props);
     console.log(this.props.firstTime);
+    this.clickFunc = this.clickFunc.bind(this);
+
   }
 
   generateText(){
@@ -26,26 +28,30 @@ class HomeCard extends Component {
 
   generateSubtitleText(){
     if (this.props.firstTime){
-      return <div dangerouslySetInnerHTML={{__html:"feedr is a new type of restaurant app. <br/><br/> We help you find the food you're looking for without the overwhelming maps and lists.<br/><br/>"}}></div>
+      return <div dangerouslySetInnerHTML={{__html:"feedr is a new type of restaurant app. <br/><br/> We help you find the right place to eat without the overwhelming maps and lists.<br/><br/>"}}></div>
     }
     return 'Looks like you\'re all out of restaurants! Click below to start over.'
   }
 
+  clickFunc() {
+    this.props.sendRequest()
+    setTimeout(() => {
+      this.props.generateCards()
+    }, 3000);  }
+
   render() {
       return (
         <div className='cardContainer'>
-          <img className='cardImg' src='/img/avocado.jpg' alt='swipe-demo' />
           <div className='cardTitle homecardTitle'>{this.generateTitleText()}</div>
           <div className='cardSubtitle homeCardSubtitle'>{this.generateSubtitleText()}</div>
 
 
-          {this.props.firstTime === true? <div>
-          <Autocomplete onChange={this.props.setLocation} style={{width: '90%'}} onPlaceSelected={(place) => {console.log(place);}}types={['(regions)']}componentRestrictions={{country: "us"}}/>
-          <button onClick={this.props.sendRequest} >Location verify</button> 
+          {this.props.firstTime === true ? <div>
+          <Autocomplete className="location" onChange={this.props.setLocation} style={{width: '90%'}} onPlaceSelected={this.props.setAutocompleteLocation} componentRestrictions={{country: "us"}}/>
           </div> :null}
 
-          
-          <button className='button1' onClick={this.props.generateCards}>{this.generateText()}</button>
+
+          <button className='button2' onClick={this.clickFunc}>{this.generateText()}</button>
         </div>
         )
   }

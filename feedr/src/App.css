@@ -14,18 +14,44 @@ body{
 }
 
 .button1{
-  background-color: #ea5858;
+  background: #fff;
+  background-size: cover;
   border-radius: 20px;
-  padding: 10px 30px;
-  box-shadow: 1px 1px 5px .5px #999999;
-  color: white;
-  border: 0px;
+  padding: 15px 50px;
+  background: #ff9a9e;
+  border: 4px solid #fff;
   font-size: 12pt;
   font-family: Roboto;
-  letter-spacing: 2px;
   font-weight: 300;
-  margin-top: 15px;
-  width: auto;
+  width: 290px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: absolute;
+  text-align: center;
+  bottom: 20px;
+  right:10px;
+  z-index:9999444499;
+}
+
+.button2{
+  background: #fff;
+  background-size: cover;
+  border-radius: 20px;
+  padding: 15px 50px;
+  background: #ff9a9e;
+  border: 4px solid #fff;
+  font-size: 12pt;
+  font-family: Roboto;
+  font-weight: 300;
+  width: 290px;
+  color: #fff;
+  font-weight: 700;
+  letter-spacing: 2px;
+  position: absolute;
+  text-align: center;
+  bottom: 20px;
+  right: 10px;
 }
 
 /* HEADBAR CLASSES */
@@ -52,35 +78,31 @@ body{
 
 
 
-
-
-
-
 /* CARD CLASSES */
 
 .cardContainer{
   background-color: white;
   position: absolute;
-  top: 80px;
-  margin: 0px 10px;
+  margin: 30px;
   padding: 20px;
   border-radius: 10px;
-  box-shadow: 1px 1px 30px -1px rgba(0,0,0,.15);
+  box-shadow: 1px 10px 30px -1px rgba(0,0,0,.15);
   text-align: center;
-  height: 80vh;
-  width: 315px;
+  height: 450px;
+  width: 270px;
+  overflow-x: hidden;
 }
 
 .restCardContainer{
   background-color: white;
   position: absolute;
-  top: 20px;
-  margin: 0px 10px;
+  top: 0px;
+  margin: 30px;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  height: 80vh;
-  width: 315px;
+  height: 450px;
+  width: 270px;
 }
 
 .restCardDisplayNone{
@@ -90,13 +112,13 @@ body{
 .restProfileContainer{
   background-color: white;
   position: absolute;
-  top: 20px;
-  margin: 0px 10px;
+  top: 0px;
+  margin: 30px;
   padding: 20px;
   border-radius: 10px;
   text-align: center;
-  height: 80vh;
-  width: 315px;
+  height: 450px;
+  width: 270px;
 }
 
 .restProfileDisplayNone{
@@ -105,7 +127,7 @@ body{
 
 .cardTitle{
   width: 100%;
-  font-size: 24pt;
+  font-size: 12pt;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -113,10 +135,11 @@ body{
 }
 
 .homecardTitle{
-  margin-top: -45px;
-  color: #fff;
-  text-shadow: 2px 2px 5px rgba(0,0,0,.15);
   font-weight: 400;
+  font-family: "Damion";
+  text-transform: none;
+  font-size: 64px;
+  text-align: center;
 }
 
 .cardSubtitle{
@@ -133,15 +156,40 @@ body{
   text-align: center;
 }
 
-.cardImg{
-  width: 355px;
+.cardImgContainer{
+  height: 300px;
+  width: 310px;
+  overflow: hidden;
   margin-left: -20px;
   margin-top: -20px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  padding: 0px;
 }
 
+.cardImg{
+  min-width: 345px;
+  max-height: 300px;
+  margin-top: -40px;
+  margin-left: -30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0px;
+  object-fit: cover;
+}
+
+.profImgContainer{
+  height: 300px;
+  width: 310px;
+  overflow: hidden;
+  margin-left: -20px;
+}
+
+.profcardTitle{
+  font-family: "Damion";
+  font-size: 32px;
+  text-transform: none;
+  margin: 10px auto;
+}
 .restProfileImg{
   width: 355px;
   margin-left: -20px;
@@ -153,7 +201,7 @@ body{
 
 .ourChoice{
   font-weight: 700;
-  letter-spacing: 6px;
+  letter-spacing: 3px;
   text-align: left;
   color: #666;
   font-size: 10px;
@@ -170,8 +218,8 @@ body{
 }
 
 .restProfileDescription{
-  font-weight: 700;
   letter-spacing: 1px;
+  font-weight: 300;
   text-align: left;
   font-size: 14px;
   margin-top: 10px;
@@ -184,5 +232,41 @@ body{
 
 
 
+.back-circle{
+  position: fixed;
+  width: 1000px;
+  height: 1000px;
+  background-image: linear-gradient(to top, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+  background-size: cover;
+  border-radius: 100%;
+  margin-left: -320px;
+  bottom: -590px;
+  box-shadow: 0px 0px 30px rgba(0,0,0,.15);
+
+}
+
+.full-container{
+  width: 375px;
+  height: 667px;
+  overflow: hidden;
+  display: block;
+  position: fixed;
+}
+
+.location{
+  border: none;
+  border-bottom: 3px solid #ff9a9e;
+  padding-bottom: 5px;
+  border-radius: 0;
+  font-weight: 300;
+  font-family: "Roboto";
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.rest-profile-container{
+  position: absolute;
+  height: 1000px;
+}
 
 /* HOMECARD CLASSES */

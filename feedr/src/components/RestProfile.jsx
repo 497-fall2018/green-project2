@@ -7,7 +7,7 @@ class RestProfile extends Component {
     this.state = {
       displayed: false
     }
-    
+
   }
 
   changeCardClass(){
@@ -35,16 +35,14 @@ class RestProfile extends Component {
 
   render() {
     return (
-      <div>
+      <div className="rest-profile-container">
         <div className={this.cardClass()} style={{zIndex:'999'}}>
         <div className='yourChoice'>YOUR CHOICE:</div>
-        <div className='cardTitle'>{this.props.restName}</div>
-        <img className='restProfileImg' src={this.props.restImg} alt='rest-chosen' />
+        <div className='profcardTitle'>{this.props.restName}</div>
           <div className="restProfileDescription">Location: {this.props.restAddr}</div>
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
-          <div className="restProfileDescription">{this.isClosed()}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
-          <div className="restProfileDescription">Rating: {this.props.restRating}</div>
+          <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
           <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
         </div>
       </div>

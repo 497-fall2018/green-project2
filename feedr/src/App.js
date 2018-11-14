@@ -108,7 +108,7 @@ class App extends Component {
             'Access-Control-Allow-Credentials': 'true'
           }
         }
-      
+
         this.GetRestaurants(url, obj)
       }
 
@@ -152,6 +152,16 @@ class App extends Component {
        // this.SendRequest();
       })
   }
+
+  setAutocompleteLocation(strLocation){
+     console.log('setLocation method execute!!');
+       this.setState({
+         locationTest:strLocation.formatted_address
+       },function(){
+         console.log(this.state.locationTest);
+        // this.SendRequest();
+       })
+   }
 
   noThanks(){
     this.setState({
@@ -229,19 +239,19 @@ class App extends Component {
 
     var c = this.state.chosenRestIndex
     return (
-      <div>
-        <Headbar />
-        <HomeCard firstTime={this.state.firstTime} sendRequest={this.sendRequest.bind(this)}  setLocation={this.setLocation.bind(this)} generateCards={()=> this.generateCards()} />
+      <div className="full-container">
+        <div className="back-circle"></div>
+        <HomeCard firstTime={this.state.firstTime} sendRequest={this.sendRequest.bind(this)}  setLocation={this.setLocation.bind(this)} generateCards={this.generateCards.bind(this)} setAutocompleteLocation={this.setAutocompleteLocation.bind(this)} />
         {cardStack}
-        <RestProfile displayed = {this.state.restChosen} 
-          restName = {this.state.tempList[c]} 
-          restDescription = {this.state.descList[c]} 
-          restImg = {this.state.imgList[c]} 
-          restAddr = {this.state.addrList[c]} 
-          restIsClosed = {this.state.isClosedList[c]} 
-          restPhone = {this.state.phoneList[c]} 
-          restPrice = {this.state.priceList[c]} 
-          restRating = {this.state.ratingList[c]} 
+        <RestProfile displayed = {this.state.restChosen}
+          restName = {this.state.tempList[c]}
+          restDescription = {this.state.descList[c]}
+          restImg = {this.state.imgList[c]}
+          restAddr = {this.state.addrList[c]}
+          restIsClosed = {this.state.isClosedList[c]}
+          restPhone = {this.state.phoneList[c]}
+          restPrice = {this.state.priceList[c]}
+          restRating = {this.state.ratingList[c]}
           closeRestProfile = {()=>this.closeRestProfile()} />
       </div>
     );
