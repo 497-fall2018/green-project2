@@ -178,7 +178,8 @@ class App extends Component {
   closeRestProfile(){
     this.setState({
       restChosen: false
-    })
+    });
+    this.noThanks();
   }
 
   swiping(e, deltaX, deltaY, absX, absY, velocity) {
@@ -206,7 +207,6 @@ class App extends Component {
     if(direction==='RIGHT'){
       this.setState({
         restChosen: true,
-        cardsGenerated: false,
         chosenRestIndex: index,
         locationTest:''
       });
