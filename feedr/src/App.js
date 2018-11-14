@@ -236,7 +236,7 @@ class App extends Component {
             onSwipedRight={() => this.onSwiped('RIGHT', i)} >
               <Draggable>
                 <div>
-                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} />
+                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
                 </div>
               </Draggable>
           </Swipeable>
