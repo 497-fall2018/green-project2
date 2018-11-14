@@ -5,6 +5,7 @@ import HomeCard from './components/HomeCard';
 import RestCard from './components/RestCard';
 import RestProfile from './components/RestProfile';
 import Swipeable from 'react-swipeable';
+import Loading from './components/Loading';
 
 // import axios from 'axios';
 import Draggable from 'react-draggable';
@@ -29,7 +30,8 @@ class App extends Component {
       isClosedList:[],
       phoneList:[],
       priceList:[],
-      ratingList:[]
+      ratingList:[],
+      loading: false
     }
     this.child = React.createRef();
 
@@ -91,6 +93,9 @@ class App extends Component {
   }
 
   sendRequest(){
+        this.setState({
+          loading: true
+        })
         const proxyurl = "https://cors-anywhere.herokuapp.com/";
         var url = proxyurl + 'https://api.yelp.com/v3/businesses/search?location=' + this.state.locationTest;
         var bearer_token = "h-92ctgESgaQnU1snhIDjHp997zk4U0YAP13T1fps98DT14y4AlTW3bmUoqf1A1HHPDjH2-snhdttnUUF1gupBtFDDP8CF7KRcYb1s2qzKb5Y32EirPW69uVMwLaW3Yx"
@@ -138,7 +143,8 @@ class App extends Component {
     this.setState({
       firstTime: false,
       cardsGenerated: true,
-      numCards: this.state.tempList.length
+      numCards: this.state.tempList.length,
+      loading: false
     });
   }
 
@@ -172,7 +178,8 @@ class App extends Component {
   closeRestProfile(){
     this.setState({
       restChosen: false
-    })
+    });
+    this.noThanks();
   }
 
   swiping(e, deltaX, deltaY, absX, absY, velocity) {
@@ -200,10 +207,15 @@ class App extends Component {
     if(direction==='RIGHT'){
       this.setState({
         restChosen: true,
-        cardsGenerated: false,
         chosenRestIndex: index,
         locationTest:''
       });
+    }
+  }
+
+  renderLoading(){
+    if (this.state.loading){
+      return <Loading/>
     }
   }
 
@@ -224,7 +236,7 @@ class App extends Component {
             onSwipedRight={() => this.onSwiped('RIGHT', i)} >
               <Draggable>
                 <div>
-                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} />
+                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
                 </div>
               </Draggable>
           </Swipeable>
@@ -253,6 +265,7 @@ class App extends Component {
           restPrice = {this.state.priceList[c]}
           restRating = {this.state.ratingList[c]}
           closeRestProfile = {()=>this.closeRestProfile()} />
+        {this.renderLoading()}
       </div>
     );
   }
