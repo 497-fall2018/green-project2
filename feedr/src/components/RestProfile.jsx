@@ -51,6 +51,10 @@ class RestProfile extends Component {
   	}
   }
 
+  getPhoneNumber(){
+    return "tel:"+this.props.restPhone
+  }
+
   render() {
 
     if(this.state.mapShowStatus === false){
@@ -67,7 +71,7 @@ class RestProfile extends Component {
           <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
          
           <button style={{fontSize:'25px', textAlign:'center'}} onClick={()=>this.mapShow()}>GO</button>
-
+          <a href={this.getPhoneNumber()}><button className="buttonCall">Call</button></a>
           <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
         </div>
       </div>
