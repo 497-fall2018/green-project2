@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import GoogleMap from './GoogleMap';
+import GoogleMap1 from './GoogleMap';
 
 class RestProfile extends Component {
 
@@ -80,7 +80,7 @@ class RestProfile extends Component {
 
     return(
       <div>
-      <GoogleMap mapClose={this.mapClose.bind(this)} Lat={this.props.restLat} Lng={this.props.restLng}></GoogleMap>
+      <GoogleMap1 mapClose={this.mapClose.bind(this)} userLat={this.props.userLat} userLng={this.props.userLng} restLat={this.props.restLat} restLng={this.props.restLng}></GoogleMap1>
       </div>
     )
 

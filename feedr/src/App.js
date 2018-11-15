@@ -36,7 +36,9 @@ class App extends Component {
       coordinates_longitude_List:[],
       mapStatus : false,     
       loading: false,
-      chosenRestImages:[]
+      chosenRestImages:[],
+      user_location_lat:42.057903, 
+      user_location_lng:-87.675849
     }
     this.child = React.createRef();
   }
@@ -269,6 +271,8 @@ changeMapStatus(){
           restRating = {this.state.ratingList[c]}
           restLat={this.state.coordinates_latitude_List[c]}
           restLng={this.state.coordinates_longitude_List[c]}
+          userLat={this.state.user_location_lat}
+          userLng={this.state.user_location_lng}
           changeMapStatus={this.changeMapStatus.bind(this)}
           closeRestProfile = {()=>this.closeRestProfile()} />
         {this.renderLoading()}

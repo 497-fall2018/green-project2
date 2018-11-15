@@ -1,47 +1,77 @@
-import React from "react"
-import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
+//npm install --save react-google-maps
 
-class GoogleMap extends React.Component {
+import React from 'react';
+import ReactDOM from 'react-dom';
+const { compose, withProps, lifecycle } = require("recompose");
+const {withScriptjs,withGoogleMap,GoogleMap,DirectionsRenderer,} = require("react-google-maps");
 
-    constructor() {
-        super()
-        this.state = {
-        }
-    }
+class GoogleMap1 extends React.Component{
 
+    render(){
 
-    render() {
+        const MapWithADirectionsRenderer = compose(
+            withProps({
+              googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBc3bsKQXVsZ-P-MRqPQyIiW1xwi_HEGZw&v=3.exp&libraries=geometry,drawing,places",
+              loadingElement: <div style={{ height: `100%` }} />,
+              containerElement: <div style={{ height: `600px` }} />,
+              mapElement: <div style={{ height: `100%` }} />,
+            }),
+            withScriptjs,
+            withGoogleMap,
+            lifecycle({
+              componentDidMount() {                
+                const DirectionsService = new window.google.maps.DirectionsService();    
+                const userLat=this.props.userLat
+                const userLng=this.props.userLng
+                const restLat = this.props.restLat
+                const restLng = this.props.restLng
+                console.log(userLat+"sssss")
+                console.log(userLng+"sssss")
+                console.log(restLat+"sssss")
+                console.log(restLng+"sssss")
 
-        const style = {
-            width: '100%',
-            height: '100%'
-        }
-
-
-        console.log(this.props.Lat+"the data received from RestProfile ")
-        return (    
-            <div>
-                <button onClick={this.props.mapClose}>Close Map</button>
-                <Map
-                    google={this.props.google}
-                    style={style}
-                    initialCenter={{
-                        lat: this.props.Lat,
-                        lng: this.props.Lng
-                    }}
-                    zoom={14}>
-                    <Marker onClick={this.onMarkerClick} name={'Current location'} />
-                    <InfoWindow onClose={this.onInfoWindowClose}>
-                    </InfoWindow>
-                </Map>
+                const a = this.props.lat
+                DirectionsService.route({
+                //   origin: new window.google.maps.LatLng(42.057903, -87.675849),
+                //   destination: new window.google.maps.LatLng(42.0445084, -87.6846137),
+                origin: new window.google.maps.LatLng(userLat,userLng),
+                destination: new window.google.maps.LatLng(restLat, restLng),
+                  travelMode: window.google.maps.TravelMode.DRIVING,
+                }, (result, status) => {
+                  if (status === window.google.maps.DirectionsStatus.OK) {
+                    this.setState({
+                      directions: result,
+                      haha:this.props.haha
+                    });
+                  } else {
+                    console.error(`error fetching directions ${result}`);
+                  }
+                });
+              }
+            })
+          )(props =>
+              <div>
+            <GoogleMap
+              defaultZoom={7}
+              defaultCenter={new window.google.maps.LatLng(41.8507300, -87.6512600)}
+            >
+              {props.directions && <DirectionsRenderer directions={props.directions} />}
+            </GoogleMap>
             </div>
-        )
+          );
+          return(
+            <div>
+                <button onClick={this.props.mapClose}>close Map</button>
+            <MapWithADirectionsRenderer restLat={this.props.restLat} restLng={this.props.restLng} userLat={this.props.userLat} userLng={this.props.userLng}></MapWithADirectionsRenderer>
+            </div>
+      )
     }
-
+   
 }
 
-//export default GoogleMap;
-export default GoogleApiWrapper({
-    apiKey: ("AIzaSyBc3bsKQXVsZ-P-MRqPQyIiW1xwi_HEGZw")
-})(GoogleMap)
+export default GoogleMap1;
+
+
+
+
 
