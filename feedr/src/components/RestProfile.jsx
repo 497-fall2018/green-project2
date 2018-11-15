@@ -25,7 +25,14 @@ class RestProfile extends Component {
     },function(){
       console.log(this.state.mapShowStatus)
     })
-   
+  }
+
+  mapClose(){
+    this.setState({
+      mapShowStatus : false 
+    },function(){
+      console.log(this.state.mapShowStatus)
+    })
   }
 
   cardClass(){
@@ -47,7 +54,7 @@ class RestProfile extends Component {
   render() {
 
     if(this.state.mapShowStatus === false){
-      console.log(this.state.mapShowStatus+"居然可以直接获得这个值了!")
+      console.log(this.state.mapShowStatus)
 
     return (
       <div className="rest-profile-container">
@@ -58,7 +65,9 @@ class RestProfile extends Component {
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
           <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
-          <button className="button1" onClick={()=>this.mapShow()}>Go</button>
+         
+          <button style={{fontSize:'25px', textAlign:'center'}} onClick={()=>this.mapShow()}>GO</button>
+
           <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
         </div>
       </div>
@@ -67,7 +76,7 @@ class RestProfile extends Component {
 
     return(
       <div>
-      <GoogleMap Lat={this.props.restLat} Lng={this.props.restLng}></GoogleMap>
+      <GoogleMap mapClose={this.mapClose.bind(this)} Lat={this.props.restLat} Lng={this.props.restLng}></GoogleMap>
       </div>
     )
 

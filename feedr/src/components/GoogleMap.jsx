@@ -21,6 +21,7 @@ class GoogleMap extends React.Component {
         console.log(this.props.Lat+"the data received from RestProfile ")
         return (    
             <div>
+                <button onClick={this.props.mapClose}>Close Map</button>
                 <Map
                     google={this.props.google}
                     style={style}
@@ -43,3 +44,4 @@ class GoogleMap extends React.Component {
 export default GoogleApiWrapper({
     apiKey: ("AIzaSyBc3bsKQXVsZ-P-MRqPQyIiW1xwi_HEGZw")
 })(GoogleMap)
+

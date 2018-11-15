@@ -31,6 +31,9 @@ class App extends Component {
       phoneList:[],
       priceList:[],
       ratingList:[],
+      coordinates_latitude_List:[],
+      coordinates_longitude_List:[],
+      mapStatus : false,     
       loading: false
     }
     this.child = React.createRef();
@@ -132,6 +135,8 @@ class App extends Component {
           this.state.phoneList.push(restaurant.phone)
           this.state.priceList.push(restaurant.price)
           this.state.ratingList.push(restaurant.rating)
+          this.state.coordinates_latitude_List.push(restaurant.coordinates.latitude)
+          this.state.coordinates_longitude_List.push(restaurant.coordinates.longitude)
         })
       });
   }
@@ -148,6 +153,14 @@ class App extends Component {
     });
   }
 
+changeMapStatus(){
+  console.log("changeMapStatus is executed")
+  this.setState({
+    showStatus:true
+  },function(){
+  console.log("mapStatus:::"+this.state.mapStatus)
+  })
+}
 
  setLocation(event){
     console.log('setLocation method execute!!');
@@ -264,6 +277,9 @@ class App extends Component {
           restPhone = {this.state.phoneList[c]}
           restPrice = {this.state.priceList[c]}
           restRating = {this.state.ratingList[c]}
+          restLat={this.state.coordinates_latitude_List[c]}
+          restLng={this.state.coordinates_longitude_List[c]}
+          changeMapStatus={this.changeMapStatus.bind(this)}
           closeRestProfile = {()=>this.closeRestProfile()} />
         {this.renderLoading()}
       </div>
