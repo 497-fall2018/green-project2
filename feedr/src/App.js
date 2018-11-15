@@ -23,6 +23,7 @@ class App extends Component {
       numCards: 0,
       chosenRestIndex: 0,
       locationTest:'Evanston',
+      restIDList:[],
       tempList:[],
       imgList:[],
       descList:[],
@@ -34,65 +35,10 @@ class App extends Component {
       coordinates_latitude_List:[],
       coordinates_longitude_List:[],
       mapStatus : false,     
-      loading: false
+      loading: false,
+      chosenRestImages:[]
     }
     this.child = React.createRef();
-
-// this.tempList = ['Joy Yee Noodle', '10Q Chicken']
-// this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
-// this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
-// this.addrList = ['519 Davis St', '816 Church St']
-
-
-    // axios.get('/restaurant/data')
-    // .then(res=>{
-    //   if(res.status===200){
-    //      console.log(res.data);
-    //      this.tempList=[];
-    //      this.imgList=[];
-    //      this.descList=[];
-    //      this.addrList=[];
-    //      var i;
-    //      for (i =0; i< res.data.length; i++){
-    //       this.tempList.push(res.data[i]["temp"]);
-    //       this.imgList.push(res.data[i]["img"]);
-    //       this.descList.push(res.data[i]["desc"]);
-    //       this.descList.push(res.data[i]["addr"]);
-    //      }
-    //    }
-    //    })
-
-    // this.tempList = []
-    // this.imgList = []
-    // this.descList = []
-    // this.addrList = []
-    // this.isClosedList = []
-    // this.phoneList = []
-    // this.priceList = []
-    // this.ratingList = []
-
- //   this.location = "Evanston"
-    // this.location='Evanston'
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // var url = proxyurl + 'https://api.yelp.com/v3/businesses/search?location=' + this.location;
-    // var bearer_token = "h-92ctgESgaQnU1snhIDjHp997zk4U0YAP13T1fps98DT14y4AlTW3bmUoqf1A1HHPDjH2-snhdttnUUF1gupBtFDDP8CF7KRcYb1s2qzKb5Y32EirPW69uVMwLaW3Yx"
-    // var bearer = 'Bearer '+ bearer_token;
-    // var obj = {
-    //   method: 'GET',
-    //   // withCredentials: true,
-    //   // credentials: 'include',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Authorization': bearer,
-    //     'Content-Type': 'application/json',
-    //     'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
-    //     'Access-Control-Allow-Headers': '*',
-    //     'Access-Control-Allow-Credentials': 'true'
-    //   }
-    // }
-
-    //this.SendRequest();
-    //this.GetRestaurants(url, obj)
   }
 
   sendRequest(){
@@ -127,6 +73,7 @@ class App extends Component {
       }).then(data => {
         console.log(data.businesses)
         data.businesses.map((restaurant) => {
+          this.state.restIDList.push(restaurant.id)
           this.state.tempList.push(restaurant.name)
           this.state.imgList.push(restaurant.image_url)
           this.state.descList.push(restaurant.name)
@@ -141,6 +88,49 @@ class App extends Component {
       });
   }
 
+  GetRestaurantDetails(restID){
+    this.setState({
+      loading: true
+    })
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    var url = proxyurl + 'https://api.yelp.com/v3/businesses/'+restID;
+    var bearer_token = "h-92ctgESgaQnU1snhIDjHp997zk4U0YAP13T1fps98DT14y4AlTW3bmUoqf1A1HHPDjH2-snhdttnUUF1gupBtFDDP8CF7KRcYb1s2qzKb5Y32EirPW69uVMwLaW3Yx"
+    var bearer = 'Bearer '+ bearer_token;
+    var obj = {
+      method: 'GET',
+      // withCredentials: true,
+      // credentials: 'include',
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': bearer,
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Credentials': 'true'
+      }
+    }
+
+    this.FetchRestaurantDetails(url, obj)
+  }
+
+  FetchRestaurantDetails(url, obj) {
+    fetch(url, obj)
+      .then(results => {
+        return results.json()
+      }).then(data => {
+        console.log(data.businesses)
+        data.businesses.map((restaurant) => {
+          this.state.tempList.push(restaurant.name)
+          this.state.imgList.push(restaurant.image_url)
+          this.state.descList.push(restaurant.name)
+          this.state.addrList.push(restaurant.location.display_address)
+          this.state.isClosedList.push(restaurant.is_closed)
+          this.state.phoneList.push(restaurant.phone)
+          this.state.priceList.push(restaurant.price)
+          this.state.ratingList.push(restaurant.rating)
+        })
+      });
+  }
 
   generateCards() {
     console.log('generateCards');
