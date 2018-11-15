@@ -34,62 +34,6 @@ class App extends Component {
       loading: false
     }
     this.child = React.createRef();
-
-// this.tempList = ['Joy Yee Noodle', '10Q Chicken']
-// this.imgList = ['/img/jy.jpg', '/img/10q.jpg']
-// this.descList = ['BYOB eatery offers an extensive menu of Pan-Asian offerings & smoothies in a basic setting.', 'Specializing in fried chicken, 10Q serves up chicken tenders, wings, sandwiches, bowls and combo platters with a variety of sauces available. Sides include bacon ranch cheese fries, white rice, pickled jalapenos and more.']
-// this.addrList = ['519 Davis St', '816 Church St']
-
-
-    // axios.get('/restaurant/data')
-    // .then(res=>{
-    //   if(res.status===200){
-    //      console.log(res.data);
-    //      this.tempList=[];
-    //      this.imgList=[];
-    //      this.descList=[];
-    //      this.addrList=[];
-    //      var i;
-    //      for (i =0; i< res.data.length; i++){
-    //       this.tempList.push(res.data[i]["temp"]);
-    //       this.imgList.push(res.data[i]["img"]);
-    //       this.descList.push(res.data[i]["desc"]);
-    //       this.descList.push(res.data[i]["addr"]);
-    //      }
-    //    }
-    //    })
-
-    // this.tempList = []
-    // this.imgList = []
-    // this.descList = []
-    // this.addrList = []
-    // this.isClosedList = []
-    // this.phoneList = []
-    // this.priceList = []
-    // this.ratingList = []
-
- //   this.location = "Evanston"
-    // this.location='Evanston'
-    // const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    // var url = proxyurl + 'https://api.yelp.com/v3/businesses/search?location=' + this.location;
-    // var bearer_token = "h-92ctgESgaQnU1snhIDjHp997zk4U0YAP13T1fps98DT14y4AlTW3bmUoqf1A1HHPDjH2-snhdttnUUF1gupBtFDDP8CF7KRcYb1s2qzKb5Y32EirPW69uVMwLaW3Yx"
-    // var bearer = 'Bearer '+ bearer_token;
-    // var obj = {
-    //   method: 'GET',
-    //   // withCredentials: true,
-    //   // credentials: 'include',
-    //   headers: {
-    //     'Accept': 'application/json',
-    //     'Authorization': bearer,
-    //     'Content-Type': 'application/json',
-    //     'Access-Control-Allow-Origin': 'http://127.0.0.1:3000',
-    //     'Access-Control-Allow-Headers': '*',
-    //     'Access-Control-Allow-Credentials': 'true'
-    //   }
-    // }
-
-    //this.SendRequest();
-    //this.GetRestaurants(url, obj)
   }
 
   sendRequest(){
