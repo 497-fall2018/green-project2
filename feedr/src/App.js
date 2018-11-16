@@ -271,7 +271,6 @@ changeMapStatus(){
           restLng={this.state.coordinates_longitude_List[c]}
           userLat={this.state.user_location_lat}
           userLng={this.state.user_location_lng}
-          restImages = {this.state.chosenRestImages}
           changeMapStatus={this.changeMapStatus.bind(this)}
           closeRestProfile = {()=>this.closeRestProfile()} />
         {this.renderLoading()}
