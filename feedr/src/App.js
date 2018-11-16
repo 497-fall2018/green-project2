@@ -40,7 +40,10 @@ class App extends Component {
       user_location_lat:42.057903, 
       user_location_lng:-87.675849
     }
-    this.child = React.createRef();
+    this.childList = [];
+    for (let i=0; i<20; i++){
+      this.childList.push(React.createRef());
+    }
   }
 
   sendRequest(){
@@ -206,8 +209,7 @@ changeMapStatus(){
   onSwiped(direction, index) {
     console.log('ryan just swiped ',direction)
     if(direction==='LEFT'){
-      this.noThanks()
-      this.child.current.changeCardClass();
+      this.noThanks();
     }
     if(direction==='RIGHT'){
       this.setState({
@@ -216,6 +218,7 @@ changeMapStatus(){
         locationTest:''
       });
     }
+    this.childList[index].current.changeCardClass();
   }
 
   renderLoading(){
@@ -237,11 +240,11 @@ changeMapStatus(){
             onSwipedUp={this.swipedUp}
             trackMouse
             preventDefaultTouchmoveEvent
-            onSwipedLeft={() => this.onSwiped('LEFT')}
+            onSwipedLeft={() => this.onSwiped('LEFT', i)}
             onSwipedRight={() => this.onSwiped('RIGHT', i)} >
               <Draggable>
                 <div>
-                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
+                  <RestCard ref={this.childList[i]} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
                 </div>
               </Draggable>
           </Swipeable>
