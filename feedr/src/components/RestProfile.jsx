@@ -6,7 +6,7 @@ class RestProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      displayed: false,      
+      displayed: false,
       mapShowStatus : false
     }
 
@@ -21,7 +21,7 @@ class RestProfile extends Component {
 
   mapShow(){
     this.setState({
-      mapShowStatus : true 
+      mapShowStatus : true
     },function(){
       console.log(this.state.mapShowStatus)
     })
@@ -29,7 +29,7 @@ class RestProfile extends Component {
 
   mapClose(){
     this.setState({
-      mapShowStatus : false 
+      mapShowStatus : false
     },function(){
       console.log(this.state.mapShowStatus)
     })
@@ -57,6 +57,11 @@ class RestProfile extends Component {
 
   render() {
 
+    var mapText = String(this.props.restAddr)
+    var mapWithSpaces = mapText.replace(/ /g, "+");
+    var mapURL = 'https://www.google.com/maps/place/' + mapWithSpaces
+    console.log('RESTADDRESS', mapURL)
+
     if(this.state.mapShowStatus === false){
       console.log(this.state.mapShowStatus)
 
@@ -69,8 +74,8 @@ class RestProfile extends Component {
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
           <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
-         
-          <button style={{fontSize:'25px', textAlign:'center'}} onClick={()=>this.mapShow()}>GO</button>
+
+          <a href={mapURL} target='_blank'><button className='goButton'>GO</button></a>
           <a href={this.getPhoneNumber()}><button className="buttonCall">Call</button></a>
           <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
         </div>
