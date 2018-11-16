@@ -69,6 +69,7 @@ class RestProfile extends Component {
         <div className={this.cardClass()} style={{zIndex:'999'}}>
         <div className='yourChoice'>YOUR CHOICE:</div>
         <div className='profcardTitle'>{this.props.restName}</div>
+          <img className='cardImg' src={this.props.restImages[0]} alt='swipe-demo' />
           <div className="restProfileDescription">Location: {this.props.restAddr}</div>
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
