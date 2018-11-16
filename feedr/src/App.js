@@ -79,7 +79,7 @@ class App extends Component {
           this.state.tempList.push(restaurant.name)
           this.state.imgList.push(restaurant.image_url)
           this.state.descList.push(restaurant.name)
-          this.state.addrList.push(restaurant.location.display_address)
+          this.state.addrList.push(restaurant.location.display_address[0]+ ", "+restaurant.location.display_address[1])
           this.state.isClosedList.push(restaurant.is_closed)
           this.state.phoneList.push(restaurant.phone)
           this.state.priceList.push(restaurant.price)
