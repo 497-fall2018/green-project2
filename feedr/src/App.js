@@ -34,13 +34,16 @@ class App extends Component {
       ratingList:[],
       coordinates_latitude_List:[],
       coordinates_longitude_List:[],
-      mapStatus : false,     
+      mapStatus : false,
       loading: false,
       chosenRestImages:[],
-      user_location_lat:42.057903, 
+      user_location_lat:42.057903,
       user_location_lng:-87.675849
     }
-    this.child = React.createRef();
+    this.childList = [];
+    for (let i=0; i<20; i++){
+      this.childList.push(React.createRef());
+    }
   }
 
   sendRequest(){
@@ -120,17 +123,7 @@ class App extends Component {
       .then(results => {
         return results.json()
       }).then(data => {
-        console.log(data.businesses)
-        data.businesses.map((restaurant) => {
-          this.state.tempList.push(restaurant.name)
-          this.state.imgList.push(restaurant.image_url)
-          this.state.descList.push(restaurant.name)
-          this.state.addrList.push(restaurant.location.display_address)
-          this.state.isClosedList.push(restaurant.is_closed)
-          this.state.phoneList.push(restaurant.phone)
-          this.state.priceList.push(restaurant.price)
-          this.state.ratingList.push(restaurant.rating)
-        })
+          this.state.chosenRestImages = data.photos
       });
   }
 
@@ -206,16 +199,17 @@ changeMapStatus(){
   onSwiped(direction, index) {
     console.log('ryan just swiped ',direction)
     if(direction==='LEFT'){
-      this.noThanks()
-      this.child.current.changeCardClass();
+      this.noThanks();
     }
     if(direction==='RIGHT'){
+      this.GetRestaurantDetails(this.state.restIDList[this.state.chosenRestIndex])
       this.setState({
         restChosen: true,
         chosenRestIndex: index,
         locationTest:''
       });
     }
+    this.childList[index].current.changeCardClass();
   }
 
   renderLoading(){
@@ -237,11 +231,11 @@ changeMapStatus(){
             onSwipedUp={this.swipedUp}
             trackMouse
             preventDefaultTouchmoveEvent
-            onSwipedLeft={() => this.onSwiped('LEFT')}
+            onSwipedLeft={() => this.onSwiped('LEFT', i)}
             onSwipedRight={() => this.onSwiped('RIGHT', i)} >
               <Draggable>
                 <div>
-                  <RestCard ref={this.child} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
+                  <RestCard ref={this.childList[i]} key={i} restName={rest} restDescription={this.state.descList[i]} restImg={this.state.imgList[i]} restAddr = {this.state.addrList[i]} noThanks={()=>this.noThanks()} yesPlese={() => this.onSwiped('RIGHT', i)}/>
                 </div>
               </Draggable>
           </Swipeable>
@@ -273,6 +267,7 @@ changeMapStatus(){
           restLng={this.state.coordinates_longitude_List[c]}
           userLat={this.state.user_location_lat}
           userLng={this.state.user_location_lng}
+          restImages = {this.state.chosenRestImages}
           changeMapStatus={this.changeMapStatus.bind(this)}
           closeRestProfile = {()=>this.closeRestProfile()} />
         {this.renderLoading()}
