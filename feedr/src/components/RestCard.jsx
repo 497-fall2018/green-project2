@@ -34,7 +34,14 @@ class RestCard extends Component {
         <div className='ourChoice'>OUR CHOICE:</div>
           <div className='cardTitle'>{this.props.restName}</div>
           <div className="ourChoice address">{this.props.restAddr}</div>
-          <button className="button1" onClick={()=>this.changeCardClass()}>NO THANKS</button>
+          <div className='restCardButtonContainer'>
+            <button className="containedButton" onClick={()=>this.changeCardClass()} style={{backgroundColor:'rgba(234, 72, 72, .8)'}}>
+              <img className='containedButtonImg' src='/img/close.png' />
+            </button>
+            <button className="containedButton" onClick={this.props.yesPlese} style={{backgroundColor:'rgba(64, 229, 119, .8)'}}>
+              <img className='containedButtonImg' src='/img/check.png' />
+            </button>
+          </div>
         </div>
       </div>
     );
