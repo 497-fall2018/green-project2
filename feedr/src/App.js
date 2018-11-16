@@ -204,11 +204,13 @@ changeMapStatus(){
     }
     if(direction==='RIGHT'){
       this.GetRestaurantDetails(this.state.restIDList[this.state.chosenRestIndex])
-      this.setState({
-        restChosen: true,
-        chosenRestIndex: index,
-        locationTest:''
-      });
+
+      setTimeout(() => {
+        this.setState({
+          restChosen: true,
+          chosenRestIndex: index,
+          locationTest:''
+      })}, 5000);
     }
     this.childList[index].current.changeCardClass();
   }
@@ -251,6 +253,7 @@ changeMapStatus(){
 
     var c = this.state.chosenRestIndex
     console.log("state before render", this.state.chosenRestImages)
+
     return (
       <div className="full-container">
         <div className="back-circle"></div>
