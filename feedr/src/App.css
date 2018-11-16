@@ -34,6 +34,27 @@ body{
   z-index:9999444499;
 }
 
+.buttonContainer{
+  width:100%;
+  height:50px;
+  text-align: center;
+  padding-top: 80px;
+}
+
+.containedButton{
+  height: 50px;
+  width: 50px;
+  margin: 0px 5px;
+  border-radius: 50%;
+  border: 0px;
+  box-shadow: 1px 1px 20px -5px #999;
+}
+
+.containedButtonImg{
+  height: 30px;
+  margin: 2px;
+}
+
 .goButton{
   border-radius: 20px;
   padding: 15px 50px;

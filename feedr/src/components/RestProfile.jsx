@@ -60,7 +60,6 @@ class RestProfile extends Component {
     var mapText = String(this.props.restAddr)
     var mapWithSpaces = mapText.replace(/ /g, "+");
     var mapURL = 'https://www.google.com/maps/place/' + mapWithSpaces
-    console.log('RESTADDRESS', mapURL)
 
     if(this.state.mapShowStatus === false){
       console.log(this.state.mapShowStatus)
@@ -74,10 +73,18 @@ class RestProfile extends Component {
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
           <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
-
-          <a href={mapURL} target='_blank'><button className='goButton'>GO</button></a>
-          <a href={this.getPhoneNumber()}><button className="buttonCall">Call</button></a>
-          <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
+          <div className='buttonContainer'>
+            <button className="containedButton" onClick={()=>this.changeCardClass()} style={{backgroundColor:'red'}}>
+              <img className='containedButtonImg' src='/img/back.png' />
+            </button>
+            <div style={{width: '50px', display:'inline-block'}}></div>
+            <a href={mapURL} target='_blank'><button className='containedButton' style={{backgroundColor:'blue'}}>
+              <img className='containedButtonImg' src='/img/directions.png' />
+            </button></a>
+            <a href={this.getPhoneNumber()}><button className="containedButton" style={{backgroundColor:'green'}}>
+              <img className='containedButtonImg' src='/img/phone.png' />
+            </button></a>
+          </div>
         </div>
       </div>
     );
