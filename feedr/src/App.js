@@ -34,10 +34,10 @@ class App extends Component {
       ratingList:[],
       coordinates_latitude_List:[],
       coordinates_longitude_List:[],
-      mapStatus : false,     
+      mapStatus : false,
       loading: false,
       chosenRestImages:[],
-      user_location_lat:42.057903, 
+      user_location_lat:42.057903,
       user_location_lng:-87.675849
     }
     this.child = React.createRef();
@@ -120,17 +120,7 @@ class App extends Component {
       .then(results => {
         return results.json()
       }).then(data => {
-        console.log(data.businesses)
-        data.businesses.map((restaurant) => {
-          this.state.tempList.push(restaurant.name)
-          this.state.imgList.push(restaurant.image_url)
-          this.state.descList.push(restaurant.name)
-          this.state.addrList.push(restaurant.location.display_address)
-          this.state.isClosedList.push(restaurant.is_closed)
-          this.state.phoneList.push(restaurant.phone)
-          this.state.priceList.push(restaurant.price)
-          this.state.ratingList.push(restaurant.rating)
-        })
+          this.state.chosenRestImages = data.photos
       });
   }
 
@@ -210,6 +200,7 @@ changeMapStatus(){
       this.child.current.changeCardClass();
     }
     if(direction==='RIGHT'){
+      this.GetRestaurantDetails(this.state.restIDList[this.state.chosenRestIndex])
       this.setState({
         restChosen: true,
         chosenRestIndex: index,
@@ -255,6 +246,7 @@ changeMapStatus(){
     }
 
     var c = this.state.chosenRestIndex
+    console.log(this.state.chosenRestImages)
     return (
       <div className="full-container">
         <div className="back-circle"></div>
@@ -274,7 +266,8 @@ changeMapStatus(){
           userLat={this.state.user_location_lat}
           userLng={this.state.user_location_lng}
           changeMapStatus={this.changeMapStatus.bind(this)}
-          closeRestProfile = {()=>this.closeRestProfile()} />
+          closeRestProfile = {()=>this.closeRestProfile()}
+          restImages = {this.state.chosenRestImages} />
         {this.renderLoading()}
       </div>
     );

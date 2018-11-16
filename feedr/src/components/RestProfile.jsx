@@ -6,7 +6,7 @@ class RestProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
-      displayed: false,      
+      displayed: false,
       mapShowStatus : false
     }
 
@@ -21,7 +21,7 @@ class RestProfile extends Component {
 
   mapShow(){
     this.setState({
-      mapShowStatus : true 
+      mapShowStatus : true
     },function(){
       console.log(this.state.mapShowStatus)
     })
@@ -29,7 +29,7 @@ class RestProfile extends Component {
 
   mapClose(){
     this.setState({
-      mapShowStatus : false 
+      mapShowStatus : false
     },function(){
       console.log(this.state.mapShowStatus)
     })
@@ -57,6 +57,8 @@ class RestProfile extends Component {
 
   render() {
 
+    console.log('FIRST RESTING', this.props.restImages)
+
     if(this.state.mapShowStatus === false){
       console.log(this.state.mapShowStatus)
 
@@ -65,11 +67,12 @@ class RestProfile extends Component {
         <div className={this.cardClass()} style={{zIndex:'999'}}>
         <div className='yourChoice'>YOUR CHOICE:</div>
         <div className='profcardTitle'>{this.props.restName}</div>
+          <img className='cardImg' src={this.props.restImages[0]} alt='swipe-demo' />
           <div className="restProfileDescription">Location: {this.props.restAddr}</div>
           <div className="restProfileDescription">Phone: {this.props.restPhone}</div>
           <div className="restProfileDescription">Price: {this.props.restPrice}</div>
           <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
-         
+
           <button style={{fontSize:'25px', textAlign:'center'}} onClick={()=>this.mapShow()}>GO</button>
           <a href={this.getPhoneNumber()}><button className="buttonCall">Call</button></a>
           <button className="button1" onClick={()=>this.changeCardClass()}>CLOSE</button>
