@@ -37,7 +37,7 @@ class HomeCard extends Component {
     this.props.sendRequest()
     setTimeout(() => {
       this.props.generateCards()
-    }, 2000);  }
+    }, 4000);  }
 
   render() {
       return (
