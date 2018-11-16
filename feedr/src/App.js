@@ -203,14 +203,13 @@ changeMapStatus(){
       this.noThanks();
     }
     if(direction==='RIGHT'){
-      this.GetRestaurantDetails(this.state.restIDList[this.state.chosenRestIndex])
+      // this.GetRestaurantDetails(this.state.restIDList[this.state.chosenRestIndex])
 
-      setTimeout(() => {
-        this.setState({
-          restChosen: true,
-          chosenRestIndex: index,
-          locationTest:''
-      })}, 5000);
+      this.setState({
+        restChosen: true,
+        chosenRestIndex: index,
+        locationTest:''
+      });
     }
     this.childList[index].current.changeCardClass();
   }
