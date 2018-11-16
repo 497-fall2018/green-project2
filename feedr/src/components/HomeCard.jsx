@@ -21,14 +21,14 @@ class HomeCard extends Component {
 
   generateTitleText(){
     if (this.props.firstTime){
-      return 'Welcome.'
+      return 'feedr.'
     }
     return 'Uh oh...'
   }
 
   generateSubtitleText(){
     if (this.props.firstTime){
-      return <div dangerouslySetInnerHTML={{__html:"feedr is a new type of restaurant app. <br/><br/> We help you find the right place to eat without the overwhelming maps and lists.<br/><br/>"}}></div>
+      return <div dangerouslySetInnerHTML={{__html:"find food fast.<br/><br/>"}}></div>
     }
     return 'Looks like you\'re all out of restaurants! Click below to start over.'
   }
@@ -43,6 +43,7 @@ class HomeCard extends Component {
       return (
         <div className='cardContainer'>
           <div className='cardTitle homecardTitle'>{this.generateTitleText()}</div>
+          <img style={{width: '40%'}} src='img/feedr.png' />
           <div className='cardSubtitle homeCardSubtitle'>{this.generateSubtitleText()}</div>
 
 
