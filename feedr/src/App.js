@@ -210,7 +210,7 @@ changeMapStatus(){
           restChosen: true,
           chosenRestIndex: index,
           locationTest:''
-      })}, 5000);
+      })}, 2000);
     }
     this.childList[index].current.changeCardClass();
   }
