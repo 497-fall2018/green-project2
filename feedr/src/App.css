@@ -206,6 +206,25 @@ body{
   object-fit: cover;
 }
 
+.restcardImgContainer{
+  height: 170px;
+  width: 310px;
+  overflow: hidden;
+  margin-left: -20px;
+  margin-top: 20px;
+}
+
+.restcardImg{
+  min-width: 345px;
+  max-height: 170px;
+  margin-top: -40px;
+  margin-left: -30px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 0px;
+  object-fit: cover;
+}
+
 .profCardImg{
   width: 100%;
   box-shadow: 0px 0px 30px -5px rgba(0,0,0,.15);
@@ -274,6 +293,7 @@ body{
   margin-left: -320px;
   bottom: -590px;
   box-shadow: 0px 0px 30px rgba(0,0,0,.15);
+  z-index: -9999999;
 
 }
 
@@ -283,6 +303,20 @@ body{
   overflow: hidden;
   display: block;
   position: fixed;
+}
+
+.fakeCardBack{
+  width: 275px;
+  height: 97px;
+  overflow: hidden;
+  display: block;
+  position: fixed;
+  background: rgba(255,255,255,.5);
+  z-index: -99;
+  margin-top: 440px;
+  margin-left: 45px;
+  border-radius: 10px;
+  webkit-filter: blur(3px);
 }
 
 .location{
@@ -299,6 +333,20 @@ body{
 .rest-profile-container{
   position: absolute;
   height: 1000px;
+}
+
+.restInfoTable{
+  margin-top: -25px;
+  text-align: left;
+}
+
+td{
+  padding: 4px 15px;
+  vertical-align: top;
+}
+
+.restInfoTableHeader{
+  font-weight: bold;
 }
 
 /* HOMECARD CLASSES */

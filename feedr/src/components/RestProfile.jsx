@@ -69,10 +69,25 @@ class RestProfile extends Component {
         <div className={this.cardClass()} style={{zIndex:'999'}}>
         <div className='yourChoice'>YOUR CHOICE:</div>
         <div className='profcardTitle'>{this.props.restName}</div>
-          <img className='profCardImg' src={this.props.restImg} alt='swipe-demo' />
-          <div className="restProfileDescription">Location: {this.props.restAddr}</div>
-          <div className="restProfileDescription">Price: {this.props.restPrice}</div>
-          <div className="restProfileDescription">Rating: {this.props.restRating} / 5 stars</div>
+        <div className="restcardImgContainer">
+          <img className='restcardImg' src={this.props.restImg} alt='swipe-demo' />
+          </div>
+          <table className="restInfoTable">
+          <tbody>
+          <tr>
+          <td className="restInfoTableHeader">Location</td>
+          <td> {this.props.restAddr} </td>
+          </tr>
+          <tr>
+          <td className="restInfoTableHeader">Price </td>
+          <td> {this.props.restPrice} </td>
+          </tr>
+          <tr>
+          <td className="restInfoTableHeader">Rating</td>
+          <td>{this.props.restRating} / 5 stars</td>
+          </tr>
+          </tbody>
+          </table>
           <div className='buttonContainer'>
             <button className="containedButton" onClick={()=>this.changeCardClass()} style={{backgroundColor:'rgba(234, 72, 72, .8)'}}>
               <img className='containedButtonImg' src='/img/back.png' />

@@ -226,6 +226,7 @@ changeMapStatus(){
     if (this.state.cardsGenerated){
       cardStack = this.state.tempList.map((rest,i)=>{
         return(
+          <div>
           <Swipeable
             onSwiping={this.swiping}
             onSwipingLeft={this.swipingLeft}
@@ -241,6 +242,7 @@ changeMapStatus(){
                 </div>
               </Draggable>
           </Swipeable>
+          </div>
           )
       })
     }
@@ -255,6 +257,8 @@ changeMapStatus(){
 
     return (
       <div className="full-container">
+      <div className="fakeCardBack"></div>
+
         <div className="back-circle"></div>
         <HomeCard firstTime={this.state.firstTime} sendRequest={this.sendRequest.bind(this)}  setLocation={this.setLocation.bind(this)} generateCards={this.generateCards.bind(this)} setAutocompleteLocation={this.setAutocompleteLocation.bind(this)} />
         {cardStack}
