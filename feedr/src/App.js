@@ -124,6 +124,7 @@ class App extends Component {
         return results.json()
       }).then(data => {
           this.state.chosenRestImages = data.photos
+          console.log("Chosen Image URLs", this.state.chosenRestImages)
       });
   }
 
@@ -249,6 +250,7 @@ changeMapStatus(){
     }
 
     var c = this.state.chosenRestIndex
+    console.log("state before render", this.state.chosenRestImages)
     return (
       <div className="full-container">
         <div className="back-circle"></div>
